@@ -65,9 +65,16 @@ node {
     }
 
     stage('Publish Image') {
-        def img = docker.image('ol001-listaccounts-mediation:0.0.1-SNAPSHOT');
+        def img = docker.image('ol_dummy_service:0.0.1-SNAPSHOT');
+
         docker.withRegistry('http://nexus:2375', 'nexus') {
-          img.push();
-        }
+        sh "git rev-parse HEAD > .git/commit-id"
+        def commit_id = readFile('.git/commit-id').trim()
+
+        println commit_id
+        img.push();
+        img.push('latest')
+        img.push("${commit_id}")
+	}
     }
 }
