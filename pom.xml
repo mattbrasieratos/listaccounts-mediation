@@ -186,10 +186,10 @@
                             <name>${project.artifactId}:${project.version}</name>
                             <build>
                                 <assembly>
-                                    <descriptorRef>artifact</descriptorRef>
                                     <targetDir>/opt/eap/standalone/deployments</targetDir>
+                                    <descriptor>assembly.xml</descriptor>
                                 </assembly>
-                                <!-- requires fuse on eap Docker image -->
+				<!-- requires fuse on eap Docker image -->
                                 <from>fuse_eap:6.3.0</from>
                             </build>
                         </image>
