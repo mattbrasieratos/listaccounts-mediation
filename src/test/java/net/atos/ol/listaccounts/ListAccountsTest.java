@@ -29,7 +29,7 @@ public class ListAccountsTest {
     @CubeIp(containerName = "test")
     private String cip;
 
-    @DockerUrl(containerName = "test", exposedPort = 8080)
+    @DockerUrl(containerName = "test", exposedPort = 1080)
     @ArquillianResource
     private URL url;
 
@@ -39,11 +39,11 @@ public class ListAccountsTest {
     @RunAsClient
     @InSequence(10)
     public void testOneAccount() throws Exception {
-        System.out.println("URL: "+"http://"+cip+":8080/" + "ol001-listaccounts-mediation/account/1/listaccounts");
+        System.out.println("URL: "+"http://"+cip+":1080/" + "account/1/listaccounts");
 
         given().
                 when().
-                get("http://"+cip+":8080/" + "ol001-listaccounts-mediation/account/1/listaccounts").
+                get("http://"+cip+":1080/" + "account/1/listaccounts").
                 then().
                 assertThat().body(equalTo(testData.getData("1")));
     }
@@ -53,11 +53,11 @@ public class ListAccountsTest {
     @InSequence(20)
     public void testTwoAccounts() throws Exception {
 
-        System.out.println("URL: "+"http://"+cip+":8080/" + "ol001-listaccounts-mediation/account/2/listaccounts");
+        System.out.println("URL: "+"http://"+cip+":1080/" + "account/2/listaccounts");
 
         given().
                 when().
-                get("http://"+cip+":8080/" + "ol001-listaccounts-mediation/account/2/listaccounts").
+                get("http://"+cip+":1080/" + "account/2/listaccounts").
                 then().
                 assertThat().body(equalTo(testData.getData("2")));
     }
@@ -66,11 +66,11 @@ public class ListAccountsTest {
     @InSequence(30)
     public void testNoAccounts() throws Exception {
 
-        System.out.println("URL: "+"http://"+cip+":8080/" + "ol001-listaccounts-mediation/account/0/listaccounts");
+        System.out.println("URL: "+"http://"+cip+":1080/" + "account/0/listaccounts");
 
         given().
                 when().
-                get("http://"+cip+":8080/" + "ol001-listaccounts-mediation/account/0/listaccounts").
+                get("http://"+cip+":1080/" + "account/0/listaccounts").
                 then().
                 assertThat().statusCode(Response.Status.NOT_FOUND.getStatusCode());
     }
